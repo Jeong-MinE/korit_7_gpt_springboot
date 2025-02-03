@@ -1,0 +1,17 @@
+package com.korit.springboot_study.dto.request;
+
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+
+@Data
+@ApiModel(description = "학생정보 조회 학습 DTO")
+public class ReqStudentDto {
+    @ApiModelProperty(value = "학생 이름", example = "차정민", required = true)
+            private String name;
+
+    @ApiModelProperty(value = "학생 나이", example = "28", required = true)
+            private int age;
+    ReqStudentDto reqStudentDto;
+}
