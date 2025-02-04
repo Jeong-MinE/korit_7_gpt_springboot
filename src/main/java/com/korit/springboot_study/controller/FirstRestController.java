@@ -1,13 +1,16 @@
 package com.korit.springboot_study.controller;
 
-import com.korit.springboot_study.dto.request.ReqStudentDto;
+import com.korit.springboot_study.dto.request.study.ReqAddStudentDto;
+import com.korit.springboot_study.dto.request.study.ReqStudentDto;
+import com.korit.springboot_study.dto.response.study.RespAddStudentDto;
+import com.korit.springboot_study.dto.response.study.RespStudentDto;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.models.Response;
+import lombok.Data;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -117,8 +120,45 @@ public class FirstRestController {
     public Map<String, Object> getStudents4(
             @ApiParam(value = "학생 ID", required = true)
             @PathVariable int studentId, // PathVariable 경로의 변수
+            @ModelAttribute
             ReqStudentDto reqStudentDto) {
 
         return Map.of("id", studentId, "name", reqStudentDto.getName(), "age", reqStudentDto.getAge());
+    }
+
+        @GetMapping("/api/student5/{studentId}")
+        public RespStudentDto getStudents5(
+        @ApiParam(value = "학생 ID", required = true)
+        @PathVariable int studentId, // PathVariable 경로의 변수
+        @ModelAttribute
+        ReqStudentDto reqStudentDto) {
+
+        return new RespStudentDto(100, "김준이", 33);
+    }
+
+    @PostMapping("/api/student")
+    @ApiOperation(value = "학생 추가", notes = "학생 정보를 입력받아 user_tb에 데이터를 저장합니다.")
+    public ResponseEntity<RespAddStudentDto> addStudent(@RequestBody ReqAddStudentDto reqAddStudentDto) {
+        System.out.println(reqAddStudentDto);
+//        return ResponseEntity.ok().body(new RespAddStudentDto("학생 추가 완료", true));
+          return ResponseEntity.badRequest().body(new RespAddStudentDto("학생 추가 실패", false));
+    }
+
+    @PutMapping("/api/student/{studentId}")
+    @ApiOperation(value = "학생 정보 수정", notes = "학생 ID를 기준으로 학생 정보를 수정합니다.")
+    public ResponseEntity<?> updateStudent(
+        @ApiParam(value = "학생 ID", example = "1", required = true)
+        @RequestParam int studentId,
+        @RequestParam Map<String, Object> reqBody) {
+
+        System.out.println(reqBody);
+
+        return ResponseEntity.ok().body(null);
+    }
+
+    @ApiOperation(value = "학생 정보 삭제", notes = "학생 ID를 기준으로 정보를 삭제합니다.")
+    @DeleteMapping("/api/student/{studentId}")
+    public ResponseEntity<?> deleteStudent(@PathVariable int studentId) {
+        return ResponseEntity.ok().body(null);
     }
 }
