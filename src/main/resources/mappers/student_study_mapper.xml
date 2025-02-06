@@ -22,10 +22,19 @@
         values (default, #{majorName})
     </insert>
 
-    <insert id = "insertInstructor" keyProperty="instructor">
+    <insert id = "insertInstructor" keyProperty="instructor" useGeneratedKeys="true">
         insert into instructor_tb
         values (default, #{instructorName})
     </insert>
+
+    <update id="updateMajorId">
+        update
+            major_tb
+        set
+            major_name = #{majorName}
+        where
+            major_id = #{majorId}
+    </update>
 
 
     <select id = "selectMajorsAll" resultMap="majorResultMap">

@@ -4,6 +4,7 @@ import com.korit.springboot_study.dto.entity.study.Instructor;
 import com.korit.springboot_study.dto.entity.study.Major;
 import com.korit.springboot_study.dto.request.study.ReqAddInstructorDto;
 import com.korit.springboot_study.dto.request.study.ReqAddMajorDto;
+import com.korit.springboot_study.dto.request.study.ReqUpdateMajorDto;
 import com.korit.springboot_study.dto.response.common.SuccessResponseDto;
 import com.korit.springboot_study.repository.StudentStudyRepository;
 import org.apache.ibatis.javassist.NotFoundException;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.concurrent.SuccessCallback;
 
 import java.util.List;
 
@@ -21,12 +23,12 @@ public class StudentStudyService {
     private StudentStudyRepository studentStudyRepository;
     private ReqAddMajorDto major;
 
-    public SuccessResponseDto<List<Major>> getMajorsAll() throws NotFoundException {
+    public SuccessResponseDto<List<Major>> getMajorAll() throws NotFoundException {
 
-        List<Major> foundMajors = studentStudyRepository.findMajorAll()
+        List<Major> foundMajor = studentStudyRepository.findMajorAll()
                 .orElseThrow(() -> new NotFoundException("학과 데이터가 존재하지 않습니다."));
 
-        return new SuccessResponseDto<>(foundMajors);
+        return new SuccessResponseDto<>(foundMajor);
     }
 
     private ReqAddInstructorDto instructor;
@@ -56,5 +58,14 @@ public class StudentStudyService {
                         .saveInstructor(new Instructor(0, reqAddInstructorDto.getInstructorName()))
                         .get()
         );
+    }
+
+    @Transactional(rollbackFor = Exception.class) // insert, update, delete 롤백 적용 필수
+    public SuccessResponseDto<Major> updateMajor(int majorId, ReqUpdateMajorDto reqUpdateMajorDto) throws DuplicateKeyException, NotFoundException { //modifyMajor()
+               Major updateMajor = studentStudyRepository.
+                       updateMajor(new Major(majorId, reqUpdateMajorDto.getMajorName()))
+                       .orElseThrow(() -> new NotFoundException("해당 학과 ID는 존재하지 않습니다.")); // modifiedMajor() 가능
+        return new SuccessResponseDto<>(updateMajor);
+
     }
 }

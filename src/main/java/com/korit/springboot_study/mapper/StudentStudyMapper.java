@@ -12,7 +12,9 @@ public interface StudentStudyMapper {
 
     List<Major> selectMajorsAll();
     List<Instructor> selectInstructorsAll();
-    List<Major> insertMajor(Major major);
-    List<Instructor> insertInstructor(Instructor instructor);
+    int insertMajor(Major major);
+    int insertInstructor(Instructor instructor);
+    int updateMajorName(Major major);
+
 
 }
