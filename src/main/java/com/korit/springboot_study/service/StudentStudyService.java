@@ -1,7 +1,7 @@
 package com.korit.springboot_study.service;
 
-import com.korit.springboot_study.dto.entity.study.Instructor;
-import com.korit.springboot_study.dto.entity.study.Major;
+import com.korit.springboot_study.entity.study.Instructor;
+import com.korit.springboot_study.entity.study.Major;
 import com.korit.springboot_study.dto.request.study.ReqAddInstructorDto;
 import com.korit.springboot_study.dto.request.study.ReqAddMajorDto;
 import com.korit.springboot_study.dto.request.study.ReqUpdateMajorDto;
@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.concurrent.SuccessCallback;
 
 import java.util.List;
 

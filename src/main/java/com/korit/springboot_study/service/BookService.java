@@ -1,9 +1,11 @@
 package com.korit.springboot_study.service;
 
-import com.korit.springboot_study.dto.entity.Book;
+import com.korit.springboot_study.dto.request.ReqSearchBookDto;
+import com.korit.springboot_study.entity.Book;
 import com.korit.springboot_study.dto.request.ReqAddBookDto;
 import com.korit.springboot_study.dto.response.common.SuccessResponseDto;
 import com.korit.springboot_study.repository.BookRepository;
+import jdk.jfr.Category;
 import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,13 +17,15 @@ public class BookService {
 
     @Autowired
     private BookRepository bookRepository;
-    private ReqAddBookDto book;
 
-    public SuccessResponseDto<List<Book>> getBookAll() throws NotFoundException {
+    public Book addBook(ReqAddBookDto reqAddBookDto) {
+        return bookRepository
+                .save(reqAddBookDto.toBook())
+                .get();
+    }
 
-        List<Book> foundBook = bookRepository.findBookAll()
-                .orElseThrow(() -> new NotFoundException("도서명 데이터가 존재하지 않습니다."));
-
-        return new SuccessResponseDto<>(foundBook);
+    public List<Book> getBooks(ReqSearchBookDto reqSearchBookDto) throws ExceptionInInitializerError, NotFoundException {
+        return bookRepository.findBookAll(reqSearchBookDto.getKeyword())
+                .orElseThrow(() -> new NotFoundException("조회된 도서명이 없습니다."));
     }
 }

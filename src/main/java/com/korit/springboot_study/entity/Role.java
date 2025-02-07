@@ -1,4 +1,4 @@
-package com.korit.springboot_study.dto.entity;
+package com.korit.springboot_study.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,8 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Author {
-
-    private int authorId;
-    private String authorName;
+public class Role {
+    private int roleId;
+    private String roleName;
 }

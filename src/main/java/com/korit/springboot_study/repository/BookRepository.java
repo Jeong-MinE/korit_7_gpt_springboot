@@ -1,8 +1,10 @@
 package com.korit.springboot_study.repository;
 
-import com.korit.springboot_study.dto.entity.Book;
+import com.korit.springboot_study.entity.Book;
+import com.korit.springboot_study.exception.CustomDuplicateKeyException;
 import com.korit.springboot_study.mapper.BookMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -14,16 +16,21 @@ public class BookRepository {
     @Autowired
     private BookMapper bookMapper;
 
-    public Optional<List<Book>> findBookAll() {
-        List<Book> foundBooks = bookMapper.selectBooksAll();
 
-        if (foundBooks.isEmpty()) {
-            return Optional.empty();
+    public Optional<Book> save(Book book) {
+
+        try {
+            bookMapper.insert(book);
+        }catch (DuplicateKeyException e) {
+            throw new CustomDuplicateKeyException("이미 존재하는 도서명입니다.");
         }
-
-        return foundBooks.isEmpty()
-                ? Optional.empty()
-                : Optional.ofNullable(foundBooks);
+        return Optional.of(book);
     }
 
+    public Optional<List<Book>> findBookAll(String bookName) {
+        System.out.println(bookName);
+        return bookMapper.selectBooksAll(bookName).isEmpty()
+                ? Optional.empty()
+                : Optional.of(bookMapper.selectBooksAll(bookName));
+    }
 }

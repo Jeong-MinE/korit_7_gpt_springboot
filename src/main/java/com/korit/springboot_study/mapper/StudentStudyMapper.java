@@ -1,7 +1,7 @@
 package com.korit.springboot_study.mapper;
 
-import com.korit.springboot_study.dto.entity.study.Instructor;
-import com.korit.springboot_study.dto.entity.study.Major;
+import com.korit.springboot_study.entity.study.Instructor;
+import com.korit.springboot_study.entity.study.Major;
 import org.apache.ibatis.annotations.Mapper;
 
 

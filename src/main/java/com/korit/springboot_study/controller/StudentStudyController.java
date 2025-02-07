@@ -1,7 +1,7 @@
 package com.korit.springboot_study.controller;
 
-import com.korit.springboot_study.dto.entity.study.Instructor;
-import com.korit.springboot_study.dto.entity.study.Major;
+import com.korit.springboot_study.entity.study.Instructor;
+import com.korit.springboot_study.entity.study.Major;
 import com.korit.springboot_study.dto.request.study.ReqAddInstructorDto;
 import com.korit.springboot_study.dto.request.study.ReqAddMajorDto;
 import com.korit.springboot_study.dto.request.study.ReqUpdateMajorDto;

@@ -5,7 +5,7 @@
 
 <mapper namespace="com.korit.springboot_study.mapper.AuthorMapper">
 
-    <resultMap id="authorResultMap" type="com.korit.springboot_study.dto.entity.Author">
+    <resultMap id="authorResultMap" type="com.korit.springboot_study.entity.Author">
         <id property="authorId" column="author_id" />
         <result property="authorName" column="author_name"/>
     </resultMap>

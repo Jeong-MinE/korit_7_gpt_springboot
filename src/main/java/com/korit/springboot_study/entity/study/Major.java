@@ -1,4 +1,4 @@
-package com.korit.springboot_study.dto.entity.study;
+package com.korit.springboot_study.entity.study;
 
 
 import lombok.*;
