@@ -1,4 +1,3 @@
-
 spring:
   mvc:
     pathmatch:
@@ -14,4 +13,9 @@ mybatis:
     - /mappers/*.xml
     - /mappers/book/*.xml
     - /mappers/user/*.xml
+    - /mappers/user/*.xml
 
+  logging:
+    config: classpath:log4j2
+    file:
+    path: logs

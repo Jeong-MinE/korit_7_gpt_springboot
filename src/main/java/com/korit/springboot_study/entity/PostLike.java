@@ -5,14 +5,19 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class UserRole {
-    private int userRoleId;
-    private int userId;
-    private int roleId;
+import java.time.LocalDateTime;
 
-    private Role role;
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class PostLike {
+
+    private int postLikeId;
+    private int postId;
+    private int userId;
+    private LocalDateTime createdAt;
+
+    private int likeCount;
+
 }
