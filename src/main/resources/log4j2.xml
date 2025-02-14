@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="INFO">
+<Configuration status="DEBUG">
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %highlight{%-5level} %logger{36} - %msg%n"/>
@@ -36,17 +36,14 @@
             <AppenderRef ref="Console"/>
             <AppenderRef ref="RootFileAppender" />
         </Root>
-
-        <Logger name="com.korit.springboot_study" level="debug" additivity="false">
+        <Logger name="com.korit.springboot_study" level="DEBUG" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="RootFileAppender" />
         </Logger>
 
-        <Logger name="com.korit.springboot_study" level="debug" additivity="false">
+        <Logger name="com.korit.springboot_study" level="ERROR" additivity="false">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="ErrorFileAppender" />
         </Logger>
-
-
     </Loggers>
 </Configuration>
