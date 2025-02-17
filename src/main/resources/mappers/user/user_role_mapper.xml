@@ -14,13 +14,13 @@
     <insert id="insertSelective">
         insert into user_role_tb
         select
-            0,
-            #{userId},
-            role_id
+        0,
+        #{userId},
+        role_id
         from
-            role_tb
+        role_tb
         where
-            role_name = #{roleName}
+        role_name = #{roleName}
 
     </insert>
 
